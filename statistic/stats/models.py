@@ -8,9 +8,15 @@ class BgStat(models.Model):
     hash = models.CharField(max_length=32, verbose_name="Контрольная сумма ролика")
     start_at = models.DateTimeField(verbose_name="Дата и время начала вещания")
     length = models.PositiveIntegerField(verbose_name="Хронометраж")
+    file_id = models.PositiveIntegerField(
+        verbose_name="ID роилка",
+        null=True,
+        blank=True,
+        default=None
+    )
 
     def __str__(self):
-        return f"{self.pk} {self.hash} {self.client_id} {self.length}"
+        return f"{self.pk} {self.start_at} {self.hash} {self.client_id} {self.length}"
 
     class Meta:
         verbose_name = "Статистика музыки"
@@ -25,9 +31,15 @@ class AdStat(models.Model):
     start_at = models.DateTimeField(verbose_name="Датаи время начала вещания")
     length = models.PositiveIntegerField(verbose_name="Хронометраж")
     time_block = models.TimeField(verbose_name="блок вещания ролика", null=True)
+    file_id = models.PositiveIntegerField(
+        verbose_name="ID роилка",
+        null=True,
+        blank=True,
+        default=None
+    )
 
     def __str__(self):
-        return f"{self.pk} {self.hash} {self.client_id} {self.length}"
+        return f"{self.pk} {self.start_at} {self.hash} {self.client_id} {self.length}"
 
     class Meta:
         verbose_name = "Статистика рекламы"
