@@ -1,0 +1,1275 @@
+openapi: 3.0.2
+info:
+  title: 'API documentation'
+  version: '1.0.0'
+paths:
+  /api/v1/nomenclature/{id}/api_name/:
+    get:
+      operationId: listApiNames
+      description: "Вывод объекта ApiName"
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiName'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{id}/graphics/:
+    get:
+      operationId: listIndividualGraphics
+      description: "Вывод индивидуальных графиков 
+      работы номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IndividualGraphic'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createIndividualGraphic
+      description: "Создание индивидуальных графиков работы номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualGraphic'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{id}/graphics/{id}/:
+    get:
+      operationId: retrieveIndividualGraphic
+      description: "Вывод отдельного индивидуального графика номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualGraphic'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateIndividualGraphic
+      description: "Изменение индивидуального графика работы номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualGraphic'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateIndividualGraphic
+      description: "Частичное изменение графика работы номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IndividualGraphic'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndividualGraphic'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyIndividualGraphic
+      description: "Удаление индивидуального графика работы номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{id}/detail_ad_stat/:
+    get:
+      operationId: listAdStats
+      description: "Вывод статистики роликов."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{id}/detail_ad_stat/{id}/:
+    get:
+      operationId: retrieveAdStat
+      description: "Вывод элемента статистики роликов."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{id}/detail_bg_stat/:
+    get:
+      operationId: listBgStats
+      description: "Вывод фоновой статистики в рамках одной номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{id}/detail_bg_stat/{id}/:
+    get:
+      operationId: retrieveBgStat
+      description: "Вывод элемента фоновой статистики 
+      в рамках одной номенклатуры."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/:
+    get:
+      operationId: listNomenclatures
+      description: "Вывод номенклатур."
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Nomenclature'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createNomenclature
+      description: "Создание номенклатур."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nomenclature'
+          description: ''
+      tags:
+      - api
+  /api/v1/nomenclature/{client_id}/:
+    get:
+      operationId: retrieveNomenclature
+      description: "Вывод информации о конкретной номенклатуре."
+      parameters:
+      - name: client_id
+        in: path
+        required: true
+        description: "A unique value identifying this \u041D\u043E\u043C\u0435\u043D\
+          \u043A\u043B\u0430\u0442\u0443\u0440\u0430."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nomenclature'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateNomenclature
+      description: "Изменение номенклатуры."
+      parameters:
+      - name: client_id
+        in: path
+        required: true
+        description: "A unique value identifying this \u041D\u043E\u043C\u0435\u043D\
+          \u043A\u043B\u0430\u0442\u0443\u0440\u0430."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nomenclature'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateNomenclature
+      description: "Частичное изменение номенклатуры."
+      parameters:
+      - name: client_id
+        in: path
+        required: true
+        description: "A unique value identifying this \u041D\u043E\u043C\u0435\u043D\
+          \u043A\u043B\u0430\u0442\u0443\u0440\u0430."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Nomenclature'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nomenclature'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyNomenclature
+      description: "Удаление номенклатуры."
+      parameters:
+      - name: client_id
+        in: path
+        required: true
+        description: "A unique value identifying this \u041D\u043E\u043C\u0435\u043D\
+          \u043A\u043B\u0430\u0442\u0443\u0440\u0430."
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/hw_info/:
+    get:
+      operationId: listHwInfos
+      description: "Вывод информации об оборудовании."
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HwInfo'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createHwInfo
+      description: "Создание элемента хранящего информацию об оборудовании."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HwInfo'
+          description: ''
+      tags:
+      - api
+  /api/v1/hw_info/{client}/:
+    get:
+      operationId: retrieveHwInfo
+      description: "Вывод конкретного элемента информации об оборудовании."
+      parameters:
+      - name: client
+        in: path
+        required: true
+        description: "A unique value identifying this \u0418\u043D\u0444\u043E\u0440\
+          \u043C\u0430\u0446\u0438\u044F \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\
+          \u0434\u043E\u0432\u0430\u043D\u0438\u0438."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HwInfo'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateHwInfo
+      description: "Обновление информации об оборудовании."
+      parameters:
+      - name: client
+        in: path
+        required: true
+        description: "A unique value identifying this \u0418\u043D\u0444\u043E\u0440\
+          \u043C\u0430\u0446\u0438\u044F \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\
+          \u0434\u043E\u0432\u0430\u043D\u0438\u0438."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HwInfo'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateHwInfo
+      description: "Частичное обновление информации об оборудовании."
+      parameters:
+      - name: client
+        in: path
+        required: true
+        description: "A unique value identifying this \u0418\u043D\u0444\u043E\u0440\
+          \u043C\u0430\u0446\u0438\u044F \u043E\u0431 \u043E\u0431\u043E\u0440\u0443\
+          \u0434\u043E\u0432\u0430\u043D\u0438\u0438."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/HwInfo'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HwInfo'
+          description: ''
+      tags:
+      - api
+  /api/v1/networks/:
+    get:
+      operationId: listNetworkConfigs
+      description: "Вывод сетевых карт."
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NetworkConfig'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createNetworkConfig
+      description: "Создание элемента информации о сетевой карте."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkConfig'
+          description: ''
+      tags:
+      - api
+  /api/v1/networks/{id}/:
+    get:
+      operationId: retrieveNetworkConfig
+      description: "Вывод конкретного элемента информации о сетевой карте."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkConfig'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateNetworkConfig
+      description: "Обновление информации о сетевой карте."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkConfig'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateNetworkConfig
+      description: "Частичное обновление информации о сетевой карте."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NetworkConfig'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkConfig'
+          description: ''
+      tags:
+      - api
+  /api/v1/audio_devices/:
+    get:
+      operationId: listAudioDevices
+      description: "Вывод звуковых карт."
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudioDevice'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createAudioDevice
+      description: "Создание записи о звуковой карте."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioDevice'
+          description: ''
+      tags:
+      - api
+  /api/v1/audio_devices/{id}/:
+    get:
+      operationId: retrieveAudioDevice
+      description: "Вывод информации о конкретной звуковой карте."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioDevice'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateAudioDevice
+      description: "Обновление информации о звуковой карте."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioDevice'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateAudioDevice
+      description: "Частичное обновление информации о звуковой карте."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AudioDevice'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioDevice'
+          description: ''
+      tags:
+      - api
+  /api/v1/ad_stat/:
+    get:
+      operationId: listAdStats
+      description: "Вывод статистики роликов."
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createAdStat
+      description: "Создание элемента статистики ролика."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/ad_stat/{id}/:
+    get:
+      operationId: retrieveAdStat
+      description: "Вывод элемента статистики ролика."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0421\u0442\u0430\u0442\
+          \u0438\u0441\u0442\u0438\u043A\u0430 \u0440\u0435\u043A\u043B\u0430\u043C\
+          \u044B."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateAdStat
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0421\u0442\u0430\u0442\
+          \u0438\u0441\u0442\u0438\u043A\u0430 \u0440\u0435\u043A\u043B\u0430\u043C\
+          \u044B."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateAdStat
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0421\u0442\u0430\u0442\
+          \u0438\u0441\u0442\u0438\u043A\u0430 \u0440\u0435\u043A\u043B\u0430\u043C\
+          \u044B."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdStat'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/bg_stat/:
+    get:
+      operationId: listBgStats
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createBgStat
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/bg_stat/{id}/:
+    get:
+      operationId: retrieveBgStat
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0421\u0442\u0430\u0442\
+          \u0438\u0441\u0442\u0438\u043A\u0430 \u043C\u0443\u0437\u044B\u043A\u0438\
+          ."
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateBgStat
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0421\u0442\u0430\u0442\
+          \u0438\u0441\u0442\u0438\u043A\u0430 \u043C\u0443\u0437\u044B\u043A\u0438\
+          ."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateBgStat
+      description: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0437\
+        \u0430\u043F\u0438\u0441\u044F\u043C\u0438 \u043C\u043E\u0434\u0435\u043B\u0438\
+        \ BgStat."
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: "A unique integer value identifying this \u0421\u0442\u0430\u0442\
+          \u0438\u0441\u0442\u0438\u043A\u0430 \u043C\u0443\u0437\u044B\u043A\u0438\
+          ."
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BgStat'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BgStat'
+          description: ''
+      tags:
+      - api
+  /api/v1/api-token-auth/:
+    post:
+      operationId: createAuthToken
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+      tags:
+      - api
+components:
+  schemas:
+    ApiName:
+      type: object
+      properties:
+        client:
+          type: string
+        name:
+          type: string
+          maxLength: 511
+        last_answer_time_date:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+      - client
+      - name
+    IndividualGraphic:
+      type: object
+      properties:
+        client:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+        date:
+          type: string
+          format: date
+      required:
+      - client
+      - start_time
+      - end_time
+      - date
+    AdStat:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        hash:
+          type: string
+          maxLength: 32
+        start_at:
+          type: string
+          format: date-time
+        length:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        time_block:
+          type: string
+          nullable: true
+        file_id:
+          type: integer
+          maximum: 2147483647
+          nullable: true
+          minimum: 0
+      required:
+      - client_id
+      - hash
+      - start_at
+      - length
+    BgStat:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        hash:
+          type: string
+          maxLength: 32
+        start_at:
+          type: string
+          format: date-time
+        length:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        file_id:
+          type: integer
+          maximum: 2147483647
+          nullable: true
+          minimum: 0
+      required:
+      - client_id
+      - hash
+      - start_at
+      - length
+    Nomenclature:
+      type: object
+      properties:
+        client_id:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        name:
+          type: string
+          maxLength: 511
+        mon_start_time:
+          type: string
+        mon_end_time:
+          type: string
+        tue_start_time:
+          type: string
+        tue_end_time:
+          type: string
+        wed_start_time:
+          type: string
+        wed_end_time:
+          type: string
+        thu_start_time:
+          type: string
+        thu_end_time:
+          type: string
+        fri_start_time:
+          type: string
+        fri_end_time:
+          type: string
+        sat_start_time:
+          type: string
+        sat_end_time:
+          type: string
+        sun_start_time:
+          type: string
+        sun_end_time:
+          type: string
+      required:
+      - client_id
+      - name
+      - mon_start_time
+      - mon_end_time
+      - tue_start_time
+      - tue_end_time
+      - wed_start_time
+      - wed_end_time
+      - thu_start_time
+      - thu_end_time
+      - fri_start_time
+      - fri_end_time
+      - sat_start_time
+      - sat_end_time
+      - sun_start_time
+      - sun_end_time
+    HwInfo:
+      type: object
+      properties:
+        client:
+          type: string
+        city:
+          type: string
+          nullable: true
+          maxLength: 511
+        model:
+          type: string
+          nullable: true
+          maxLength: 511
+        provider:
+          type: string
+          nullable: true
+          maxLength: 511
+        ext_ip:
+          type: string
+          nullable: true
+          maxLength: 63
+      required:
+      - client
+    NetworkConfig:
+      type: object
+      properties:
+        hw_info:
+          type: string
+        interface:
+          type: string
+          maxLength: 511
+        mac:
+          type: string
+          maxLength: 63
+        ip:
+          type: string
+          maxLength: 63
+      required:
+      - hw_info
+      - interface
+      - mac
+      - ip
+    AudioDevice:
+      type: object
+      properties:
+        hw_info:
+          type: string
+        device_name:
+          type: string
+          maxLength: 511
+        device_id:
+          type: integer
+          maximum: 32767
+          minimum: 0
+      required:
+      - hw_info
+      - device_name
+      - device_id
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+      - username
+      - password

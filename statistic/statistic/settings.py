@@ -11,10 +11,17 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from rest_framework.renderers import JSONRenderer
+
+
+class UTF8CharsetJSONRenderer(JSONRenderer):
+    charset = 'utf-8'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -25,7 +32,11 @@ SECRET_KEY = 'django-insecure-$9ct9zc0os!p2o_4be+l*4_6wr56yrp@+&smx%#9s_sinc6a*+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.0.8',
+    '192.168.122.139',
+    'statistic.krasrm.com',
+]
 
 
 # Application definition
@@ -39,8 +50,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
+    'drf_yasg',
     'stats',
+    'nomenclature',
+    'harvest',
+    'avail',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CSRF_COOKIE_SECURE = True
 
 ROOT_URLCONF = 'statistic.urls'
 
@@ -81,8 +98,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'statistic',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'USER': 'stat',
+        'PASSWORD': 'MUSIC999',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -113,10 +130,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Asia/Krasnoyarsk'
+TIME_ZONE = 'Etc/GMT-7'
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
@@ -131,15 +148,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
     'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
+        'rest_framework_yaml.parsers.YAMLParser',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+    'DEFAULT_RENDERER_CLASSES': (
+        'app.renderers.UTF8CharsetJSONRenderer',
+        'rest_framework_yaml.renderers.YAMLRenderer',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    )
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
+
+STATIC_ROOT = '/home/stat/static'
+MEDIA_ROOT = '/home/stat/media'
