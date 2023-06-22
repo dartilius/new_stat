@@ -6,6 +6,10 @@ STATUSES = (
     (2, 'Недоступна по графику'),
     (3, 'Недоступна')
 )
+CLIENT_STATUSES = (
+    (1, 'Доступна'),
+    (3, 'Недоступна')
+)
 
 
 class NomenclatureStatus(models.Model):
@@ -15,17 +19,26 @@ class NomenclatureStatus(models.Model):
         Nomenclature,
         primary_key=True,
         unique=True,
-        verbose_name='ID',
+        verbose_name='status',
         on_delete=models.CASCADE
+    )
+    service_status = models.PositiveSmallIntegerField(
+        choices=STATUSES,
+        verbose_name='Служебная доступность',
+        default=1
     )
     status = models.PositiveSmallIntegerField(
         choices=STATUSES,
-        verbose_name='Статус',
+        verbose_name='Сервисная доступность',
+        default=1
+    )
+    client_status = models.PositiveSmallIntegerField(
+        choices=CLIENT_STATUSES,
+        verbose_name='Клиентская доступность',
         default=1
     )
     answer_time = models.DateTimeField(
-        verbose_name='Последнее время ответа',
-        auto_now=True
+        verbose_name='Последнее время ответа'
     )
 
     def __str__(self):
@@ -37,7 +50,7 @@ class NomenclatureStatus(models.Model):
 
 
 class NomenclatureStatusHistory(models.Model):
-    """История изменения статусов доступности."""
+    """История изменения статусов сервисной доступности."""
 
     client = models.ForeignKey(
         Nomenclature,

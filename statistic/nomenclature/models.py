@@ -51,6 +51,30 @@ class Nomenclature(models.Model):
     sat_end_time = models.TimeField(verbose_name='Время окончания СБ')
     sun_start_time = models.TimeField(verbose_name='Время начала ВС')
     sun_end_time = models.TimeField(verbose_name='Время окончания ВС')
+    service_avail_interval = models.PositiveSmallIntegerField(
+        verbose_name='Интервал служебной доступности',
+        default=10
+    )
+    avail_interval = models.PositiveSmallIntegerField(
+        verbose_name='Интервал сервисной доступности',
+        default=1800
+    )
+    client_avail_interval = models.PositiveSmallIntegerField(
+        verbose_name='Интервал клиентской доступности',
+        default=7200
+    )
+    store_service_history = models.BooleanField(
+        verbose_name='Активность истории служебной доступности',
+        default=False
+    )
+    store_history = models.BooleanField(
+        verbose_name='Активность истории сервисной доступности',
+        default=True
+    )
+    store_client_history = models.BooleanField(
+        verbose_name='Активность истории клиентской доступности',
+        default=True
+    )
     time_zone = models.CharField(
         max_length=100,
         choices=TIMEZONES,

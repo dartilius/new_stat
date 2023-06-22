@@ -101,9 +101,9 @@ class NomenclatureStatusSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NomenclatureStatus
-        fields = ('client', 'status', 'answer_time')
+        fields = ('client', 'service_status', 'status', 'client_status', 'answer_time')
         read_only_fields = ('answer_time',)
-
+ 
     def validate(self, attrs):
         """Валидация статуса доступности, сохранение истории."""
         client_id = attrs['client']

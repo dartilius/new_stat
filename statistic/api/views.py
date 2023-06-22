@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, mixins, viewsets
 from rest_framework.response import Response
-
+from datetime import datetime
 from .viewsets import WithoutDestroyViewSet
 from .serializers import (
     BgStatSerializer, AdStatSerializer,
@@ -15,6 +15,7 @@ from avail.models import NomenclatureStatus, NomenclatureStatusHistory
 from harvest.models import HwInfo
 from nomenclature.models import Nomenclature, ApiName
 from stats.models import AdStat, BgStat
+import pytz
 
 
 class HwInfoViewSet(WithoutDestroyViewSet):
@@ -154,13 +155,31 @@ class NomenclatureStatusViewSet(WithoutDestroyViewSet):
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         client_id = request.data['client']
-        nomenclature = get_object_or_404(Nomenclature, client_id=client_id)
+        nomenclature = get_object_or_404(
+            Nomenclature.objects.select_related('nomenclaturestatus'),
+            client_id=client_id
+            )
+        nomenclature_time_zone = pytz.timezone(nomenclature.time_zone)
+        date_time = datetime.now()
+        local_time_zone = pytz.timezone('Etc/GMT-7')
+        answer_time = date_time - (
+            nomenclature_time_zone.localize(date_time) 
+            - local_time_zone.localize(date_time)
+        )
         try:
-            NomenclatureStatus.objects.create(client=nomenclature, status=1)
+            NomenclatureStatus.objects.create(
+                client=nomenclature,
+                status=1,
+                answer_time=answer_time
+            )
             return Response(status=201)
         except Exception:
-            instance = NomenclatureStatus.objects.get(client=nomenclature)
-            serializer = self.get_serializer(instance, data=request.data, partial=partial)
+            instance = nomenclature.nomenclaturestatus
+            serializer = self.get_serializer(
+                instance,
+                data=request.data,
+                partial=partial
+            )
             serializer.is_valid(raise_exception=True)
             self.perform_update(serializer)
             if getattr(instance, '_prefetched_objects_cache', None):
@@ -170,12 +189,34 @@ class NomenclatureStatusViewSet(WithoutDestroyViewSet):
     def perform_create(self, serializer):
         client_id = self.request.data['client']
         nomenclature = get_object_or_404(Nomenclature, client_id=client_id)
-        serializer.save(client=nomenclature, status=1)
+        nomenclature_time_zone = pytz.timezone(nomenclature.time_zone)
+        date_time = datetime.now()
+        local_time_zone = pytz.timezone('Etc/GMT-7')
+        answer_time = date_time - (
+            nomenclature_time_zone.localize(date_time) 
+            - local_time_zone.localize(date_time)
+        )
+        serializer.save(
+            client=nomenclature, 
+            status=1, 
+            answer_time=answer_time
+        )
 
     def perform_update(self, serializer):
         client_id = self.request.data['client']
         nomenclature = Nomenclature.objects.get(client_id=client_id)
-        serializer.save(client=nomenclature, status=1)
+        nomenclature_time_zone = pytz.timezone(nomenclature.time_zone)
+        date_time = datetime.now()
+        local_time_zone = pytz.timezone('Etc/GMT-7')
+        answer_time = date_time - (
+            nomenclature_time_zone.localize(date_time) 
+            - local_time_zone.localize(date_time)
+        )
+        serializer.save(
+            client=nomenclature,
+            status=1,
+            answer_time=answer_time
+        )
 
 
 class NomenclatureStatusHistoryViewSet(viewsets.ReadOnlyModelViewSet):
